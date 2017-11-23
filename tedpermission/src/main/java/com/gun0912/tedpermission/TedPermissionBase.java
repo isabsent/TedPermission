@@ -1,16 +1,13 @@
 package com.gun0912.tedpermission;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ public abstract class TedPermissionBase {
     private static final String PREFS_NAME_PERMISSION = "PREFS_NAME_PERMISSION";
     private static final String PREFS_IS_FIRST_REQUEST = "IS_FIRST_REQUEST";
 
-    public static boolean isGranted(Context context, @NonNull String... permissions) {
+    public static boolean isGranted(Context context, String... permissions) {
         for (String permission : permissions) {
             if (isDenied(context, permission)) {
                 return false;
@@ -32,15 +29,15 @@ public abstract class TedPermissionBase {
         return true;
     }
 
-    public static boolean isDenied(Context context, @NonNull String permission) {
+    public static boolean isDenied(Context context, String permission) {
         return !isGranted(context, permission);
     }
 
-    private static boolean isGranted(Context context, @NonNull String permission) {
-        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
+    private static boolean isGranted(Context context, String permission) {
+        return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static ArrayList<String> getDeniedPermissions(Context context, @NonNull String... permissions) {
+    public static ArrayList<String> getDeniedPermissions(Context context, String... permissions) {
         ArrayList<String> deniedPermissions = new ArrayList<>();
         for (String permission : permissions) {
             if (isDenied(context, permission)) {
@@ -50,14 +47,14 @@ public abstract class TedPermissionBase {
         return deniedPermissions;
     }
 
-    public static boolean canRequestPermission(Activity activity, @NonNull String... permissions) {
+    public static boolean canRequestPermission(Activity activity, String... permissions) {
 
         if (isFirstRequest(activity, permissions)) {
             return true;
         }
 
         for (String permission : permissions) {
-            boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
+            boolean showRationale = activity.shouldShowRequestPermissionRationale(permission);
             if (isDenied(activity, permission) && !showRationale) {
                 return false;
             }
@@ -65,7 +62,7 @@ public abstract class TedPermissionBase {
         return true;
     }
 
-    private static boolean isFirstRequest(Context context, @NonNull String[] permissions) {
+    private static boolean isFirstRequest(Context context, String[] permissions) {
         for (String permission : permissions) {
             if (!isFirstRequest(context, permission)) {
                 return false;
@@ -106,7 +103,7 @@ public abstract class TedPermissionBase {
         fragment.startActivityForResult(getSettingIntent(fragment.getActivity()), requestCode);
     }
 
-    static void setFirstRequest(Context context, @NonNull String[] permissions) {
+    static void setFirstRequest(Context context, String[] permissions) {
         for (String permission : permissions) {
             setFirstRequest(context, permission);
         }

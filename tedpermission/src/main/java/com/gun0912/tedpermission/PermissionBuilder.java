@@ -3,7 +3,6 @@ package com.gun0912.tedpermission;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.StringRes;
 
 import com.gun0912.tedpermission.util.ObjectUtils;
 
@@ -73,11 +72,11 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setRationaleMessage(@StringRes int stringRes) {
+    public T setRationaleMessage( int stringRes) {
         return setRationaleMessage(getText(stringRes));
     }
 
-    private CharSequence getText(@StringRes int stringRes) {
+    private CharSequence getText( int stringRes) {
         if (stringRes <= 0) {
             throw new IllegalArgumentException("Invalid String resource id");
         }
@@ -90,7 +89,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
     }
 
 
-    public T setRationaleTitle(@StringRes int stringRes) {
+    public T setRationaleTitle( int stringRes) {
         return setRationaleTitle(getText(stringRes));
     }
 
@@ -99,7 +98,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setDeniedMessage(@StringRes int stringRes) {
+    public T setDeniedMessage( int stringRes) {
         return setDeniedMessage(getText(stringRes));
     }
 
@@ -108,7 +107,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setDeniedTitle(@StringRes int stringRes) {
+    public T setDeniedTitle( int stringRes) {
         return setDeniedTitle(getText(stringRes));
     }
 
@@ -122,7 +121,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setGotoSettingButtonText(@StringRes int stringRes) {
+    public T setGotoSettingButtonText( int stringRes) {
         return setGotoSettingButtonText(getText(stringRes));
     }
 
@@ -131,7 +130,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setRationaleConfirmText(@StringRes int stringRes) {
+    public T setRationaleConfirmText( int stringRes) {
         return setRationaleConfirmText(getText(stringRes));
     }
 
@@ -145,7 +144,7 @@ public abstract class PermissionBuilder<T extends PermissionBuilder> {
         return (T) this;
     }
 
-    public T setDeniedCloseButtonText(@StringRes int stringRes) {
+    public T setDeniedCloseButtonText( int stringRes) {
         return setDeniedCloseButtonText(getText(stringRes));
     }
 

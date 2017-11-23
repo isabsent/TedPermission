@@ -9,10 +9,8 @@ import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
@@ -23,7 +21,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 
-public class TedPermissionActivity extends AppCompatActivity {
+public class TedPermissionActivity extends Activity {
 
 
     public static final int REQ_CODE_PERMISSION_REQUEST = 10;
@@ -132,7 +130,7 @@ public class TedPermissionActivity extends AppCompatActivity {
         final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri);
 
         if (!TextUtils.isEmpty(rationale_message)) {
-            new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+            new AlertDialog.Builder(this/*, R.style.Theme_AppCompat_Light_Dialog_Alert*/)
                     .setMessage(rationale_message)
                     .setCancelable(false)
 
@@ -206,7 +204,7 @@ public class TedPermissionActivity extends AppCompatActivity {
 
     private void showRationaleDialog(final ArrayList<String> needPermissions) {
 
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+        new AlertDialog.Builder(this/*, R.style.Theme_AppCompat_Light_Dialog_Alert*/)
                 .setTitle(rationaleTitle)
                 .setMessage(rationale_message)
                 .setCancelable(false)
@@ -224,8 +222,9 @@ public class TedPermissionActivity extends AppCompatActivity {
 
     }
 
+    @TargetApi(VERSION_CODES.M)
     public void requestPermissions(ArrayList<String> needPermissions) {
-        ActivityCompat.requestPermissions(this, needPermissions.toArray(new String[needPermissions.size()]),
+        requestPermissions(needPermissions.toArray(new String[needPermissions.size()]),
                 REQ_CODE_PERMISSION_REQUEST);
     }
 
@@ -246,8 +245,8 @@ public class TedPermissionActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
 
         ArrayList<String> deniedPermissions = TedPermissionBase.getDeniedPermissions(this, permissions);
 
@@ -266,7 +265,7 @@ public class TedPermissionActivity extends AppCompatActivity {
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this/*, R.style.Theme_AppCompat_Light_Dialog_Alert*/);
 
         builder.setTitle(denyTitle)
                 .setMessage(denyMessage)
@@ -296,6 +295,7 @@ public class TedPermissionActivity extends AppCompatActivity {
         builder.show();
     }
 
+    @TargetApi(VERSION_CODES.M)
     public boolean shouldShowRequestPermissionRationale(ArrayList<String> needPermissions) {
 
         if (needPermissions == null) {
@@ -303,7 +303,7 @@ public class TedPermissionActivity extends AppCompatActivity {
         }
 
         for (String permission : needPermissions) {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(TedPermissionActivity.this, permission)) {
+            if (!shouldShowRequestPermissionRationale(permission)) {
                 return false;
             }
         }
@@ -314,7 +314,7 @@ public class TedPermissionActivity extends AppCompatActivity {
 
     public void showWindowPermissionDenyDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this/*, R.style.Theme_AppCompat_Light_Dialog_Alert*/);
         builder.setMessage(denyMessage)
                 .setCancelable(false)
                 .setNegativeButton(deniedCloseButtonText, new DialogInterface.OnClickListener() {

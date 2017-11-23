@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion versions.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
         applicationId "com.gun0912.tedpermissiondemo"
-        minSdkVersion versions.minSdkVersion
-        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -21,10 +21,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
     }
 
     compileOptions {
@@ -41,6 +37,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile project(':tedpermission')
-    compile project(':tedpermission-rx2')
-    compile project(':tedpermission-rx1')
 }

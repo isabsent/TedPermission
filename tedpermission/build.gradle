@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
-
 android {
-    compileSdkVersion versions.compileSdkVersion
-    buildToolsVersion versions.buildToolsVersion
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
-        minSdkVersion versions.minSdkVersion
-        targetSdkVersion versions.targetSdkVersion
+        minSdkVersion 14
+        targetSdkVersion 23
     }
     buildTypes {
         release {
@@ -19,12 +18,8 @@ android {
     lintOptions {
         abortOnError false
     }
-
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile deps.support.appcompat
 }
-
-apply from: rootProject.file('publish.gradle')
