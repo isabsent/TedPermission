@@ -1,7 +1,8 @@
 # TedPermission - Fork
 Easy check permission library for Android Marshmallow.
 
-Used in the original **TedPermission** Android support library conflicts with my project code and was stripped out. Min **SDK level** was set up to **14**. You can make it lower by choosing other theme in `...\tedpermission\src\main\AndroidManifest.xml` (see [here](https://stackoverflow.com/questions/9832114/how-to-use-device-default-theme-for-app))
+Used in the original **TedPermission** Android support library conflicted with my project code and was stripped out. Min **SDK level** was set up to **14**. You can make it lower by choosing other theme in `...\tedpermission\src\main\AndroidManifest.xml` (see [here](https://stackoverflow.com/questions/9832114/how-to-use-device-default-theme-for-app)).
+
 Generating an apk from this project you will create `tedpermission-release.aar` library inside of `...\tedpermission\build\outputs\aar` folder which can be used in your Android project if placed in the `libs` folder by means of 
 
     repositories {
